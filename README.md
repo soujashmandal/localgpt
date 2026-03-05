@@ -44,6 +44,21 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Build Docker image
+
+```bash
+docker build -t localgpt .
+```
+
+## Run with Docker
+
+```bash
+docker run -d -p 3000:3000 -e MODEL=llama3:8b \
+  --name localgpt \
+  -v localgpt-ollama:/root/.ollama \
+  localgpt
+```
+
 ## Run tests
 
 ```bash
