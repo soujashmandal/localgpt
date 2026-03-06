@@ -1,0 +1,32 @@
+#!/bin/bash
+
+IMAGE="soujashmandal/localgpt:latest"
+CONTAINER="localgpt"
+
+case "$1" in
+  start)
+    echo "🚀 Starting LocalGPT..."
+    docker run -d \
+      -p 3000:3000 \
+      -v localgpt-ollama:/root/.ollama \
+      --name $CONTAINER \
+      $IMAGE
+    ;;
+
+  stop)
+    echo "🛑 Stopping LocalGPT..."
+    docker stop $CONTAINER
+    docker rm $CONTAINER
+    ;;
+
+  logs)
+    docker logs -f $CONTAINER
+    ;;
+
+  *)
+    echo "Usage:"
+    echo "  localgpt start"
+    echo "  localgpt stop"
+    echo "  localgpt logs"
+    ;;
+esac
